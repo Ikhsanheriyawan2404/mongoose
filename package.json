@@ -1,0 +1,19 @@
+{
+  "name": "mongoose",
+  "version": "1.0.0",
+  "description": "Learn ExpressJS and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ikhsanheriyawan2404/mongoose.git"
+  },
+  "author": "Ikhsan Heriyawan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ikhsanheriyawan2404/mongoose/issues"
+  },
+  "homepage": "https://github.com/Ikhsanheriyawan2404/mongoose#readme"
+}
