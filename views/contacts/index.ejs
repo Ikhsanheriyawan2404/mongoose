@@ -29,7 +29,7 @@
                             <td><%= value.phone_number %></td>
                             <td><%= value.email %></td>
                             <td>
-                                <a href="/contact/<%= value.nik %>" class="btn btn-sm btn-primary"><i class="bi bi-info-circle"></i></a>
+                                <a href="/contact/<%= value._id %>" class="btn btn-sm btn-primary"><i class="bi bi-info-circle"></i></a>
                                 <a href="/contact/edit/<%= value._id %>" class="btn btn-sm btn-success"><i class="bi bi-pencil"></i></a>
                                 <form action="/contact?_method=DELETE" method="post" class="d-inline">
                                     <input type="hidden" name="_id" value="<%= value._id %>">

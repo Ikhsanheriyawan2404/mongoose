@@ -137,17 +137,15 @@ app.delete('/contact/', (req, res) => {
     });
 })
 
-// // Detail Contact
-// app.get('/contact/', async (req, res) => {
-    
-//     const data = await Contact.find();
-//     res.render('contacts/index', {
-//         layout: 'layouts/main',
-//         title: 'Halaman Contact',
-//         data,
-//         msg: req.flash('msg')
-//     });
-// });
+// Detail Contact
+app.get('/contact/:_id', async (req, res) => {
+    const contact = await Contact.findOne({ _id: req.params._id });
+    res.render('contacts/detail', {
+        layout: 'layouts/main',
+        title: 'Halaman Contact',
+        contact,
+    });
+});
 
 app.listen(port, () => {
     console.log(`Mongoose Contact App | Listening at http://localhost:${port}`)
