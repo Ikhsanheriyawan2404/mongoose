@@ -83,6 +83,53 @@ app.post('/contact', [
     }
 });
 
+// View Update Contact
+app.get('/contact/edit/:_id', async (req, res) => {
+    const contact = await Contact.findOne({ _id: req.params._id})
+    res.render('contacts/edit', {
+        layout: 'layouts/main',
+        title: 'Edit Contact',
+        contact,
+    });
+});
+
+// Update Contact
+app.put('/contact', [
+    body('name').custom(async (value, { req }) => {
+        const duplicate = await Contact.find({ name: value });
+        if (value !== req.body.oldName && duplicate) {
+            throw new Error('Nama sudah terdaftar!');
+        }
+        return true;
+    }),
+    body('name').isLength({ min: 3 })
+],
+    (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('contacts/edit', {
+            layout: 'layouts/main',
+            title: 'Form Edit Kontak',
+            errors: errors.array(),
+            contact: req.body,
+        })
+    } else {
+        Contact.updateOne(
+            { _id: req.body._id },
+            {
+                $set: {
+                    name: req.body.name,
+                    phone_number: req.body.phone_number,
+                    email: req.body.email,
+                }
+            }
+        ).then((result) => {
+            req.flash('msg', 'Data kontak berhasil diedit!');
+            res.redirect('/contact');
+        })
+    }
+});
+
 app.delete('/contact/', (req, res) => {
     Contact.deleteOne({ _id: req.body._id}).then((result) => {
         req.flash('msg', 'Data kontak berhasil dihapus!');
